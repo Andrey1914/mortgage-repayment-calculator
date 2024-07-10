@@ -12,8 +12,15 @@ const theme = {
   },
   fonts: {
     size: ["1em", "2em", "3em"],
-    weight: [700, 400],
+    weight: [400, 500, 700],
   },
-  spaces: ["8px"],
+  spaces: [
+    "0.125em" /*2px*/,
+    "0.25em" /*4px*/,
+    "0.5em",
+    "1em",
+    "2em",
+    "3.4375em",
+  ],
 };
 export default theme;

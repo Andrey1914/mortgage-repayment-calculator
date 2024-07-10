@@ -1,10 +1,38 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./page.module.css";
+import Image from "next/image";
+// import styles from "./page.module.css";
 import { ThemeProvider } from "styled-components";
 import theme from "@/theme";
-import { BtnClearAll, Header, LightSection, Title } from "@/app/PageStyled";
+import {
+  BtnClearAll,
+  Button,
+  ComplexInputField,
+  CurrencyIcon,
+  DarkSection,
+  DisplayResults,
+  Fieldset,
+  FinalResult,
+  FinalResultTotal,
+  FormSection,
+  Header,
+  Input,
+  InputsGroup,
+  InterestRate,
+  Label,
+  Legend,
+  LightSection,
+  Main,
+  MortgageTerm,
+  RadioBtn,
+  RadioGroup,
+  RadioWrap,
+  SubTitle,
+  Text,
+  Title,
+  WarningMessage,
+} from "@/app/PageStyled";
 
 interface Results {
   monthlyMortgagePayment: number;
@@ -49,7 +77,8 @@ const Home: React.FC = () => {
     return Object.keys(newWarnings).length === 0;
   };
 
-  const calculateRepayment = () => {
+  const calculateRepayment = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (triggerWarningsInCaseOfEmptyFields()) {
       const loanAmount = parseFloat(mortgageAmount);
       const numberOfPayments = parseFloat(mortgageTerm) * 12;
@@ -105,18 +134,18 @@ const Home: React.FC = () => {
     if (results) {
       const formattedResults = formatResults(results);
       return (
-        <div id="display_of_results">
-          <p id="final_result_1">
+        <DisplayResults id="display_of_results">
+          <FinalResult id="final_result_1">
             {isRepayment
               ? formattedResults.monthlyMortgagePayment
               : formattedResults.monthlyInterestPayment}
-          </p>
-          <p id="final_result_2">
+          </FinalResult>
+          <FinalResultTotal id="final_result_2">
             {isRepayment
               ? formattedResults.totalAmountToRepay
               : formattedResults.costOfLoan}
-          </p>
-        </div>
+          </FinalResultTotal>
+        </DisplayResults>
       );
     }
     return null;
@@ -124,92 +153,142 @@ const Home: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <main className={styles.main}>
+      <Main>
         <LightSection>
           <Header>
             <Title>Mortgage Calculator</Title>
-            <BtnClearAll id="clear_all_fields_button" onClick={clearAllFields}>
-              Clear All
-            </BtnClearAll>
+            <BtnClearAll onClick={clearAllFields}>Clear All</BtnClearAll>
           </Header>
-          <div className={styles.inputGroup}>
-            <label>Mortgage Amount:</label>
-            <input
-              id="input_mortgage_amount"
-              type="number"
-              value={mortgageAmount}
-              onChange={(e) => setMortgageAmount(e.target.value)}
-            />
-            {warnings.mortgageAmount && (
-              <span className={styles.warning}>This field is required.</span>
-            )}
-          </div>
+          <FormSection>
+            <form>
+              <Fieldset>
+                <Label>Mortgage Amount</Label>
+                <ComplexInputField className="complex_input_field">
+                  <CurrencyIcon className="input_clarification_block">
+                    £
+                  </CurrencyIcon>
+                  <Input
+                    id="input_mortgage_amount"
+                    type="number"
+                    value={mortgageAmount}
+                    onChange={(e) => setMortgageAmount(e.target.value)}
+                  />
+                </ComplexInputField>
+                {warnings.mortgageAmount && (
+                  <WarningMessage>This field is required.</WarningMessage>
+                )}
+              </Fieldset>
+              <InputsGroup>
+                <div>
+                  <Label>Mortgage Term</Label>
+                  <ComplexInputField className="complex_input_field">
+                    <Input
+                      id="input_mortgage_term"
+                      type="number"
+                      value={mortgageTerm}
+                      onChange={(e) => setMortgageTerm(e.target.value)}
+                    />
+                    <MortgageTerm className="input_clarification_block">
+                      years:
+                    </MortgageTerm>
+                  </ComplexInputField>
+                  {warnings.mortgageTerm && (
+                    <WarningMessage>This field is required.</WarningMessage>
+                  )}
+                </div>
+                <div>
+                  <Label>Interest Rate</Label>
+                  <ComplexInputField className="complex_input_field">
+                    <Input
+                      id="input_interest_rate"
+                      type="number"
+                      value={interestRate}
+                      onChange={(e) => setInterestRate(e.target.value)}
+                    />
+                    <InterestRate className="input_clarification_block">
+                      %
+                    </InterestRate>
+                  </ComplexInputField>
+                  {warnings.interestRate && (
+                    <WarningMessage>This field is required.</WarningMessage>
+                  )}
+                </div>
+              </InputsGroup>
 
-          <div className={styles.inputGroup}>
-            <label>Mortgage Term (years):</label>
-            <input
-              id="input_mortgage_term"
-              type="number"
-              value={mortgageTerm}
-              onChange={(e) => setMortgageTerm(e.target.value)}
-            />
-            {warnings.mortgageTerm && (
-              <span className={styles.warning}>This field is required.</span>
-            )}
-          </div>
+              <RadioGroup>
+                <Legend>Mortgage Type</Legend>
+                <RadioWrap className="radio_button_big_area">
+                  <RadioBtn
+                    id="input_radio_repayment"
+                    type="radio"
+                    name="Mortgage Type"
+                    checked={isRepayment}
+                    onChange={() => {
+                      setIsRepayment(true);
+                      setIsInterestOnly(false);
+                    }}
+                  />
+                  <Label> Repayment</Label>
+                </RadioWrap>
 
-          <div className={styles.inputGroup}>
-            <label>Interest Rate (%):</label>
-            <input
-              id="input_interest_rate"
-              type="number"
-              value={interestRate}
-              onChange={(e) => setInterestRate(e.target.value)}
-            />
-            {warnings.interestRate && (
-              <span className={styles.warning}>This field is required.</span>
-            )}
-          </div>
+                <RadioWrap className="radio_button_big_area">
+                  <RadioBtn
+                    id="input_radio_interest_only"
+                    type="radio"
+                    name="Mortgage Type"
+                    checked={isInterestOnly}
+                    onChange={() => {
+                      setIsRepayment(false);
+                      setIsInterestOnly(true);
+                    }}
+                  />
+                  <Label>Interest Only</Label>
+                </RadioWrap>
+              </RadioGroup>
+              {warnings.repaymentType && (
+                <WarningMessage>Please select a repayment type.</WarningMessage>
+              )}
 
-          <div className={styles.inputGroup}>
-            <label>
-              <input
-                id="input_radio_repayment"
-                type="radio"
-                checked={isRepayment}
-                onChange={() => {
-                  setIsRepayment(true);
-                  setIsInterestOnly(false);
-                }}
-              />
-              Repayment
-            </label>
-            <label>
-              <input
-                id="input_radio_interest_only"
-                type="radio"
-                checked={isInterestOnly}
-                onChange={() => {
-                  setIsRepayment(false);
-                  setIsInterestOnly(true);
-                }}
-              />
-              Interest Only
-            </label>
-            {warnings.repaymentType && (
-              <span className={styles.warning}>
-                Please select a repayment type.
-              </span>
-            )}
-          </div>
-
-          <button id="submit_button" onClick={calculateRepayment}>
-            Calculate Repayment
-          </button>
+              <Button type="submit" onClick={calculateRepayment}>
+                <Image
+                  src="/icon-calculator.svg"
+                  alt="Calculator Icon"
+                  width={20}
+                  height={20}
+                />
+                <span style={{ margin: "0 0 0 0.6em" }}>
+                  Calculate Repayments
+                </span>
+              </Button>
+            </form>
+          </FormSection>
         </LightSection>
-
-        <div id="empty_results_area">{displayResultsInApp()}</div>
-      </main>
+        <DarkSection>
+          <div>
+            <Image
+              src="/illustration-empty.svg"
+              alt=""
+              width={192}
+              height={192}
+              priority={false} // {false} | {true}
+            />
+            <SubTitle>Results shown here</SubTitle>
+            <Text>
+              Complete the form and click “calculate repayments” to see what
+              your monthly repayments would be.
+            </Text>
+          </div>
+          <div>
+            <SubTitle>Your results</SubTitle>
+            {displayResultsInApp()}
+            <Text>
+              Your results are shown below based on the information you
+              provided. To adjust the results, edit the form and click
+              “calculate repayments” again.
+            </Text>
+          </div>
+        </DarkSection>
+      </Main>
     </ThemeProvider>
   );
 };
