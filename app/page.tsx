@@ -2,18 +2,20 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-// import styles from "./page.module.css";
 import { ThemeProvider } from "styled-components";
 import theme from "@/theme";
 import {
   BtnClearAll,
   Button,
+  CalculatorIcon,
   ComplexInputField,
   CurrencyIcon,
   DarkSection,
   DisplayResults,
+  EmptyResultsArea,
   Fieldset,
   FinalResult,
+  FinalResultText,
   FinalResultTotal,
   FormSection,
   Header,
@@ -27,6 +29,7 @@ import {
   MortgageTerm,
   RadioBtn,
   RadioGroup,
+  RadioWarningMessage,
   RadioWrap,
   SubTitle,
   Text,
@@ -130,27 +133,6 @@ const Home: React.FC = () => {
     return formattedResults;
   };
 
-  const displayResultsInApp = () => {
-    if (results) {
-      const formattedResults = formatResults(results);
-      return (
-        <DisplayResults id="display_of_results">
-          <FinalResult id="final_result_1">
-            {isRepayment
-              ? formattedResults.monthlyMortgagePayment
-              : formattedResults.monthlyInterestPayment}
-          </FinalResult>
-          <FinalResultTotal id="final_result_2">
-            {isRepayment
-              ? formattedResults.totalAmountToRepay
-              : formattedResults.costOfLoan}
-          </FinalResultTotal>
-        </DisplayResults>
-      );
-    }
-    return null;
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <Main>
@@ -246,47 +228,67 @@ const Home: React.FC = () => {
                 </RadioWrap>
               </RadioGroup>
               {warnings.repaymentType && (
-                <WarningMessage>Please select a repayment type.</WarningMessage>
+                <RadioWarningMessage>
+                  Please select a repayment type.
+                </RadioWarningMessage>
               )}
 
               <Button type="submit" onClick={calculateRepayment}>
-                <Image
+                <CalculatorIcon
                   src="/icon-calculator.svg"
                   alt="Calculator Icon"
                   width={20}
                   height={20}
                 />
-                <span style={{ margin: "0 0 0 0.6em" }}>
-                  Calculate Repayments
-                </span>
+                Calculate Repayments
               </Button>
             </form>
           </FormSection>
         </LightSection>
         <DarkSection>
-          <div>
-            <Image
-              src="/illustration-empty.svg"
-              alt=""
-              width={192}
-              height={192}
-              priority={false} // {false} | {true}
-            />
-            <SubTitle>Results shown here</SubTitle>
-            <Text>
-              Complete the form and click “calculate repayments” to see what
-              your monthly repayments would be.
-            </Text>
-          </div>
-          <div>
-            <SubTitle>Your results</SubTitle>
-            {displayResultsInApp()}
-            <Text>
-              Your results are shown below based on the information you
-              provided. To adjust the results, edit the form and click
-              “calculate repayments” again.
-            </Text>
-          </div>
+          {results ? (
+            <div>
+              <SubTitle>Your results</SubTitle>
+              <Text>
+                Your results are shown below based on the information you
+                provided. To adjust the results, edit the form and click
+                “calculate repayments” again.
+              </Text>
+              <DisplayResults id="display_of_results">
+                <FinalResultText>Your monthly repayments</FinalResultText>
+                <FinalResult id="final_result_1">
+                  {isRepayment
+                    ? formatResults(results).monthlyMortgagePayment
+                    : formatResults(results).monthlyInterestPayment}
+                </FinalResult>
+                <div className="division_line"></div>
+                <FinalResultText>
+                  Total you will repay over the term
+                </FinalResultText>
+
+                <FinalResultTotal id="final_result_2">
+                  {isRepayment
+                    ? formatResults(results).totalAmountToRepay
+                    : formatResults(results).costOfLoan}
+                </FinalResultTotal>
+              </DisplayResults>
+            </div>
+          ) : (
+            <EmptyResultsArea id="empty_results_area">
+              <Image
+                src="/illustration-empty.svg"
+                alt=""
+                width={192}
+                height={192}
+                priority={false}
+              />
+              <SubTitle>Results shown here</SubTitle>
+              <Text style={{ textAlign: "center" }}>
+                Complete the form and click “calculate repayments” to see what
+                your monthly repayments would be.
+              </Text>
+            </EmptyResultsArea>
+          )}
         </DarkSection>
       </Main>
     </ThemeProvider>

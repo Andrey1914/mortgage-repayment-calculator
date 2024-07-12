@@ -7,6 +7,7 @@ body {
   font-family: var(--ff-sans);
   max-width: 100vw;
   overflow-x: hidden;
+  margin: 0;
   @media screen and (min-width: 768px) {
     background-color: #e4f4fd;
   }
@@ -14,8 +15,13 @@ body {
 
 * {
   box-sizing: border-box;
-  padding: 0;
+}
+
+h1,
+h2,
+p {
   margin: 0;
+  padding: 0;
 }
 
 fieldset {
@@ -116,4 +122,9 @@ input:checked {
 .radio_button_big_area:has(input:checked) {
   border: 1px solid #d8db2f;
   background-color: #d8db2f26;
+}
+
+.division_line {
+  border-top: solid 1px #9abed54d;
+  margin: 2em 0;
 }
