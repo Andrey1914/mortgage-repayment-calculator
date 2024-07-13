@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { Results, FormattedResults } from "@/interfaces";
 import { ThemeProvider } from "styled-components";
 import theme from "@/theme";
 import {
@@ -36,20 +37,6 @@ import {
   Title,
   WarningMessage,
 } from "@/app/PageStyled";
-
-interface Results {
-  monthlyMortgagePayment: number;
-  totalAmountToRepay: number;
-  monthlyInterestPayment: number;
-  costOfLoan: number;
-}
-
-interface FormattedResults {
-  monthlyMortgagePayment: string;
-  totalAmountToRepay: string;
-  monthlyInterestPayment: string;
-  costOfLoan: string;
-}
 
 const Home: React.FC = () => {
   const [mortgageAmount, setMortgageAmount] = useState<string>("");
