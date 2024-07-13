@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import { Body } from "@/app/PageStyled";
+import { Body } from "@/app/styles/Home/PageStyled";
 
 import StyledComponentsRegistry from "@/lib/registry";
 
