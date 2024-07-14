@@ -12,7 +12,7 @@ This is a solution to the [Mortgage repayment calculator challenge on Frontend M
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
+  - [Useful resource](#useful-resource)
 - [Author](#author)
 
 
@@ -34,8 +34,8 @@ Your users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Andrey1914/mortgage-repayment-calculator)
-- Live Site URL: [Add live site URL here](https://mortgage-repayment-calculator-chi.vercel.app/)
+- Solution URL: [Solution URL](https://github.com/Andrey1914/mortgage-repayment-calculator)
+- Live Site URL: [Live site URL](https://mortgage-repayment-calculator-chi.vercel.app/)
 
 ## My process
 
@@ -59,7 +59,7 @@ Your users should be able to:
 
 Here are some code examples:
 
-```.tsx component
+```ts
 import React from "react";
 import { BtnClearAll } from "@/app/styles";
 import { ClearAllButtonProps } from "@/interfaces";
@@ -71,7 +71,7 @@ const ClearAllButton: React.FC<ClearAllButtonProps> = ({ clearAllFields }) => (
 export default ClearAllButton;
 ```
 
-```type-script function
+```ts
 const triggerWarningsInCaseOfEmptyFields = (): boolean => {
     let newWarnings: { [key: string]: boolean } = {};
     if (!mortgageAmount) newWarnings.mortgageAmount = true;
@@ -83,7 +83,7 @@ const triggerWarningsInCaseOfEmptyFields = (): boolean => {
   };
 ```
 
-```CSS
+```css
 export const FinalResultText = styled.span`
   color: ${(props) => props.theme.colors.slate300};
   margin-bottom: ${(props) => props.theme.spaces[3]};
@@ -104,5 +104,5 @@ I plan to use the aforementioned technologies and methods of writing code in fut
 
 - Website - [Andrey](https://portfolio-andrei-kurka.netlify.app/)
 - Frontend Mentor - [@Andrey1914](https://www.frontendmentor.io/profile/yourusername)
-- LinkedIn - [](https://www.linkedin.com/in/andrei-kurka/)
+- LinkedIn - [Andrei Kurka](https://www.linkedin.com/in/andrei-kurka/)
 
