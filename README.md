@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Mentor - Mortgage repayment calculator solution
 
-## Getting Started
+This is a solution to the [Mortgage repayment calculator challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/mortgage-repayment-calculator-Galx1LXK73). Frontend Mentor challenges help me improve my coding skills by building realistic projects.
 
-First, run the development server:
+## Table of contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+
+
+## Overview
+
+### The challenge
+
+Your users should be able to:
+
+- Input mortgage information and see monthly repayment and total repayment amounts after submitting the form
+- See form validation messages if any field is incomplete
+- Complete the form only using their keyboard
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
+
+### Screenshot
+
+![](./public/screenshot.jpg)
+
+### Links
+
+- Solution URL: [Add solution URL here](https://github.com/Andrey1914/mortgage-repayment-calculator)
+- Live Site URL: [Add live site URL here](https://mortgage-repayment-calculator-chi.vercel.app/)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
+- [Next.js](https://nextjs.org/) - React framework
+- [Styled Components](https://styled-components.com/) - For styles
+
+### What I learned
+
+- I used nextjs for this project.
+- I practiced writing a project using type-script.
+- After writing the whole project, I refactored the code, divided it into smaller components.
+- Using `styled components` library, the `themeProvider` applied.
+- I wrote styles at an advanced level, i.e. css-in-js.
+
+Here are some code examples:
+
+```.tsx component
+import React from "react";
+import { BtnClearAll } from "@/app/styles";
+import { ClearAllButtonProps } from "@/interfaces";
+
+const ClearAllButton: React.FC<ClearAllButtonProps> = ({ clearAllFields }) => (
+  <BtnClearAll onClick={clearAllFields}>Clear All</BtnClearAll>
+);
+
+export default ClearAllButton;
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```type-script function
+const triggerWarningsInCaseOfEmptyFields = (): boolean => {
+    let newWarnings: { [key: string]: boolean } = {};
+    if (!mortgageAmount) newWarnings.mortgageAmount = true;
+    if (!mortgageTerm) newWarnings.mortgageTerm = true;
+    if (!interestRate) newWarnings.interestRate = true;
+    if (!isRepayment && !isInterestOnly) newWarnings.repaymentType = true;
+    setWarnings(newWarnings);
+    return Object.keys(newWarnings).length === 0;
+  };
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```CSS
+export const FinalResultText = styled.span`
+  color: ${(props) => props.theme.colors.slate300};
+  margin-bottom: ${(props) => props.theme.spaces[3]};
+  display: block;
+  font-size: large;
+`;
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Continued development
 
-## Learn More
+I plan to use the aforementioned technologies and methods of writing code in future projects.
 
-To learn more about Next.js, take a look at the following resources:
+### Useful resource
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Example resource](https://nextjs.org/docs/app/building-your-application/styling/css-in-js#styled-components) - This is a great article that helped me better understand the styled-components library. I would recommend it to anyone who is still learning this concept.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
+- Website - [Andrey](https://portfolio-andrei-kurka.netlify.app/)
+- Frontend Mentor - [@Andrey1914](https://www.frontendmentor.io/profile/yourusername)
+- LinkedIn - [](https://www.linkedin.com/in/andrei-kurka/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

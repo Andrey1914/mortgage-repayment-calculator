@@ -11,7 +11,7 @@ export const Fieldset = styled.fieldset`
 export const Label = styled.label`
   color: ${(props) => props.theme.colors.slate700};
   font-size: larger;
-  font-weight: ${(props) => props.theme.fonts.weight[2]};
+  font-weight: ${(props) => props.theme.fonts.weight[1]};
 
   line-height: 150%;
 `;

@@ -1,9 +1,9 @@
 const theme = {
   colors: {
-    lime: "#d8db2f",
+    lime: "hsl(61, 70%, 52%)",
     limeHovered: "#d8db2f85",
     limeClicked: "#c9cc24e4",
-    red: "#d73328",
+    red: "hsl(4, 69%, 50%)",
     slate900: "#133041",
     slate700: "#4e6e7e",
     slate500: "#6b94a8",
@@ -12,7 +12,7 @@ const theme = {
   },
   fonts: {
     size: ["1em", "2em", "3em"],
-    weight: [400, 500, 700],
+    weight: [500, 700],
   },
   spaces: [
     /*0*/ "0.125em" /*2px*/,

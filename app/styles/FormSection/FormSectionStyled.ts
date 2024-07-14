@@ -38,7 +38,7 @@ export const Button = styled.button`
   width: 100%;
   padding: 0.8em 1em;
   margin: ${(props) => props.theme.spaces[3]} 0;
-  font-weight: ${(props) => props.theme.fonts.weight[2]};
+  font-weight: ${(props) => props.theme.fonts.weight[1]};
   font-size: medium;
   gap: 0.5em;
   background-color: ${(props) => props.theme.colors.lime};
@@ -58,7 +58,7 @@ export const Button = styled.button`
     background-color: ${(props) => props.theme.colors.limeClicked};
   }
   @media screen and (min-width: 768px) {
-    font-weight: ${(props) => props.theme.fonts.weight[2]};
+    font-weight: ${(props) => props.theme.fonts.weight[1]};
     gap: 0.8em;
     margin: ${(props) => props.theme.spaces[4]} 0;
     padding: 1em 2.5em;

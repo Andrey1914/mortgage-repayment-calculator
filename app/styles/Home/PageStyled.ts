@@ -65,7 +65,7 @@ export const Header = styled.header`
 
 export const Title = styled.h1`
   color: ${(props) => props.theme.colors.slate900};
-  font-weight: ${(props) => props.theme.fonts.weight[2]};
+  font-weight: ${(props) => props.theme.fonts.weight[1]};
   font-size: ${(props) => props.theme.fonts.size[1]};
   line-height: 125%;
   font-style: normal;

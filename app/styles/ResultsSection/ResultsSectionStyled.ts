@@ -33,7 +33,7 @@ export const FinalResult = styled.p`
   color: ${(props) => props.theme.colors.lime};
   font-family: var(--ff-sans);
   font-size: xxx-large;
-  font-weight: ${(props) => props.theme.fonts.weight[2]};
+  font-weight: ${(props) => props.theme.fonts.weight[1]};
 `;
 
 export const FinalResultTotal = styled(FinalResult)`
